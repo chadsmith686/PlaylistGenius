@@ -1,1 +1,1 @@
-https://developer.spotify.com/documentation/web-api/
+https://www.last.fm/api
