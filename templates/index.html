@@ -2,10 +2,10 @@
 
 {% block content %}
 
-<form>
-    <label for="artist">Artist name:</label><br>
-    <input type="text" id="artist" name="artist"><br>
-    <button>Submit!</button>
+<form action="/search">
+    <input type="text" name="artist" placeholder="Artist Name">
+    <input type="text" name="track" placeholder="Track Name">
+    <button>Go!</button>
 </form>
 
 {% endblock %}
