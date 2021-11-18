@@ -1,8 +1,9 @@
+import json
 import requests
-from flask import Flask, redirect, render_template, request
+from flask import Flask, render_template, request
 from flask_debugtoolbar import DebugToolbarExtension
 from models import connect_db
-from secret import USER_AGENT, API_SECRET_KEY
+from secret import API_KEY 
 
 API_BASE_URL = "https://ws.audioscrobbler.com/2.0/"
 
@@ -22,21 +23,13 @@ def root():
     """Displays home page."""
     return render_template('index.html')
 
-
-def lastfm_get(payload):
-    # define headers and URL
-    headers = {'user-agent': USER_AGENT}
-    url = 'https://ws.audioscrobbler.com/2.0/'
-
-    # Add API key and format to the payload
-    payload['api_key'] = API_SECRET_KEY
-    payload['format'] = 'json'
-
-    response = requests.get(url, headers=headers, params=payload)
-    return response
-
-@app.route('/go')
+@app.route('/search')
 def get_similar_tracks():
     artist = request.args["artist"]
-    track = request.args["track"]
-    requests.get(f"{API_BASE_URL}/", params={'artist': artist, 'track': track})
+    track = request.args["track"]  
+    headers = {'User-Agent': 'chadsmithmusic@icloud.com'}
+
+    r = requests.get(f"{API_BASE_URL}?method=track.getsimilar&artist={artist}&track={track}&api_key={API_KEY}&format=json", headers=headers)
+    data = r.json() # converts to JSON
+    dict = json.loads(data)
+    return data
