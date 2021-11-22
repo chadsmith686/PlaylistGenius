@@ -1,6 +1,6 @@
 import json
 import requests
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify, make_response
 from flask_debugtoolbar import DebugToolbarExtension
 from models import connect_db
 from secret import API_KEY 
@@ -28,8 +28,6 @@ def get_similar_tracks():
     artist = request.args["artist"]
     track = request.args["track"]  
     headers = {'User-Agent': 'chadsmithmusic@icloud.com'}
-
-    r = requests.get(f"{API_BASE_URL}?method=track.getsimilar&artist={artist}&track={track}&api_key={API_KEY}&format=json", headers=headers)
-    data = r.json() # converts to JSON
-    dict = json.loads(data)
-    return data
+    r = requests.get(f"{API_BASE_URL}?method=track.getsimilar&artist={artist}&track={track}&api_key={API_KEY}&format=json", 
+                    params={'artist': artist, 'track': track}, headers=headers)
+    return r.json()
