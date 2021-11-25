@@ -1,6 +1,7 @@
 import requests
 from flask import Flask, render_template, request
 from flask_debugtoolbar import DebugToolbarExtension
+from flask_sqlalchemy import SQLAlchemy
 from models import connect_db
 from secret import API_KEY 
 
@@ -12,8 +13,8 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = "its a secret!"
 
+db = SQLAlchemy(app)
 connect_db(app)
-# db.create_all()
 
 debug = DebugToolbarExtension(app)
 
@@ -29,8 +30,8 @@ def get_similar_tracks():
     headers = {'User-Agent': 'chadsmithmusic@icloud.com'}
     r = requests.get(f"{API_BASE_URL}?method=track.getsimilar&artist={artist}&track={track}&api_key={API_KEY}&format=json", 
                     params={'artist': artist, 'track': track}, headers=headers)
+
     data = r.json()
-    
     tracks = data["similartracks"]["track"]
 
-    return render_template("results.html", data=data, tracks=tracks)
+    return render_template("results.html", data=data, tracks=tracks, artist=artist, track=track)
