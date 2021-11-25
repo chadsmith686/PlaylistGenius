@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+{% for track in tracks %}
+
+        {{ track["artist"]["name"] }} - {{ track["name"] }} ||
+
+{% endfor %}
+
+
+{% endblock %}

@@ -1,6 +1,5 @@
-import requests, json
-from urllib.request import urlopen
-from flask import Flask, render_template, request, jsonify, make_response
+import requests
+from flask import Flask, render_template, request
 from flask_debugtoolbar import DebugToolbarExtension
 from models import connect_db
 from secret import API_KEY 
@@ -31,13 +30,7 @@ def get_similar_tracks():
     r = requests.get(f"{API_BASE_URL}?method=track.getsimilar&artist={artist}&track={track}&api_key={API_KEY}&format=json", 
                     params={'artist': artist, 'track': track}, headers=headers)
     data = r.json()
-    dict = json.load(data)
+    
     tracks = data["similartracks"]["track"]
 
-    for track in tracks:
-        print("*********************")
-        print(track["artist"]["name"])
-        print(track["name"])
-        print("*********************") 
-
-    return print(tracks)
+    return render_template("results.html", data=data, tracks=tracks)
