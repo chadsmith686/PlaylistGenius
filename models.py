@@ -9,6 +9,7 @@ class Song(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     song_name = db.Column(db.String, nullable=False)
+    songs = db.relationship('Artist', secondary='songs_artists', backref='Song')
 
 class Artist(db.Model):
 
