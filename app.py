@@ -1,7 +1,6 @@
 import requests
 from flask import Flask, render_template, request
 from flask_debugtoolbar import DebugToolbarExtension
-from flask_sqlalchemy import SQLAlchemy
 from models import db, connect_db, Song
 from secret import API_KEY 
 
