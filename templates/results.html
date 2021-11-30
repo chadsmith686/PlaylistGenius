@@ -2,8 +2,6 @@
 
 {% block content %}
 
-<p>Success! Here's a new playlist with similar songs as {{artist}} - {{track}}!
-
 {% for track in tracks %}
 
 {{ track["artist"]["name"] }} - {{ track["name"] }} <br>
