@@ -3,7 +3,6 @@ from sqlalchemy.orm import backref, relationship
 
 db = SQLAlchemy()
 
-
 class Playlist(db.Model):
 
     __tablename__ = 'playlist'
@@ -11,7 +10,7 @@ class Playlist(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.Text, nullable=False)
     description = db.Column(db.Text, nullable=False)
-    children = relationship('Song', secondary='playlists_songs', backref='playlist')
+    children = db.relationship('Song', secondary='playlists_songs', backref='playlist')
 
 class Song(db.Model):
 
@@ -24,7 +23,7 @@ class Song(db.Model):
 class PlaylistSong(db.Model):
     """Mapping of a playlist to a song."""
 
-    _tablename_ = "playlists_songs"
+    __tablename__ = "playlists_songs"
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     song_id = db.Column(db.Integer, db.ForeignKey("song.id"))

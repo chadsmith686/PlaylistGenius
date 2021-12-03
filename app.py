@@ -1,7 +1,7 @@
 import requests
 from flask import Flask, render_template, request
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db, Song
+from models import db, connect_db, Song, Playlist
 from secret import API_KEY 
 
 API_BASE_URL = "https://ws.audioscrobbler.com/2.0/"
@@ -42,3 +42,8 @@ def get_similar_tracks():
     db.session.commit()
 
     return render_template("results.html", data=data, tracks=tracks, artist=artist, track=track)
+
+@app.route('/results/<int:playlist_id>')
+def show_playlist():
+    playlist = Playlist.query.get_or_404(playlist_id)
+    return render_template('playlist.html', playlist=playlist)
