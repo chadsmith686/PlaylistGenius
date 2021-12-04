@@ -39,9 +39,9 @@ def get_similar_tracks():
         song_name = track["name"]
         insert_song = Song(song_name=song_name, artist_name=artist_name)
         db.session.add(insert_song)
-    db.session.commit()
+        db.session.commit()
 
-    return render_template("results.html", data=data, tracks=tracks, artist=artist, track=track)
+    return render_template("results.html", tracks=tracks)
 
 @app.route('/results/<int:playlist_id>')
 def show_playlist():
