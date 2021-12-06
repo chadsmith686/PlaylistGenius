@@ -39,11 +39,16 @@ def get_similar_tracks():
         song_name = track["name"]
         insert_song = Song(song_name=song_name, artist_name=artist_name)
         db.session.add(insert_song)
-        db.session.commit()
+    db.session.commit()
 
     return render_template("results.html", tracks=tracks)
 
-@app.route('/results/<int:playlist_id>')
+@app.route('/playlists')
 def show_playlist():
-    playlist = Playlist.query.get_or_404(playlist_id)
-    return render_template('playlist.html', playlist=playlist)
+    playlist = Playlist.query.all()
+    return render_template('playlists.html', playlist=playlist)
+
+@app.route("/songs")
+def show_all_songs():
+    songs = Song.query.all()
+    return render_template("songs.html", songs=songs)
