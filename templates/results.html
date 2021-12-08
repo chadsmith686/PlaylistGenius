@@ -1,13 +1,23 @@
 {% extends "base.html" %}
-
 {% block content %}
 
-<h1>{{song}}</h1>
+<p>Heres are some similar songs to <b>{{artist.title()}}</b> - <b>{{track.title()}}!</b></p>
 
-{% for track in tracks %}
+<p>
+    <a href="/"><button type="button" class="btn btn-secondary" label="backbutton">Go Back</button></a>
+    <a href="/playlists/add"><button type="button" class="btn btn-primary">Save to Playlist!</button></a>
+</p>
 
-{{ track["artist"]["name"] }} - {{ track["name"] }} <br>
+<div class="container sm m-0">  
+    <ul class="list-group">
 
-{% endfor %}
+    {% for track in tracks %}
+        <li class="list-group-item list-group-item-action list-group-item-secondary">
+        {{ track["artist"]["name"] }} - {{ track["name"] }} <br>
+        </li>
+    {% endfor %}
+
+    </ul>
+</div>
 
 {% endblock %}
