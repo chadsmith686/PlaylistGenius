@@ -1,13 +1,7 @@
-#scroll {
-  background-color: #fed9ff;
-  width: 600px;
-  height: 150px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  text-align: center;
-  padding: 20px;
-}
+h1 {
+  background-color: red !important;
+} 
 
 body {
-    background-color: red;
-}
+  background-color: red !important;
+} 

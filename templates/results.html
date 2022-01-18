@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
 
-<p>Heres are some similar songs to <b>{{artist.title()}}</b> - <b>{{track.title()}}!</b></p>
-
+<p>Results for <b>{{artist.title()}}</b> - <b>{{track.title()}}.</b> 
 <p>
     <a href="/"><button type="button" class="btn btn-secondary" label="backbutton">Go Back</button></a>
     <a href="/playlists/add"><button type="button" class="btn btn-primary">Save to Playlist!</button></a>
 </p>
 
-<div class="container sm m-0">  
-    <ul class="list-group">
+<div class="container m-0 d-flex justify-content-center">  
+    <div class="row">
+        <ul class="list-group">
 
     {% for track in tracks %}
         <li class="list-group-item list-group-item-action list-group-item-secondary">
@@ -17,7 +17,7 @@
         </li>
     {% endfor %}
 
-    </ul>
+        </ul>
+    </div>
 </div>
-
 {% endblock %}

@@ -39,23 +39,23 @@ def get_similar_tracks():
     return render_template("results.html", tracks=json_tracks, artist=artist, track=track)
 
 
-# @app.route('/playlists/add')
-# def add_to_playlist():
-#     artist = request.args["artist"]
-#     track = request.args["track"]
-#     headers = {'User-Agent': 'chadsmithmusic@icloud.com'}
-#     r = requests.get(f"{API_BASE_URL}?method=track.getsimilar&artist={artist}&track={track}&api_key={API_KEY}&format=json",
-#                  params={'artist': artist, 'track': track}, headers=headers)
+@app.route('/playlists/add')
+def add_to_playlist():
+    artist = request.args["artist"]
+    track = request.args["track"]
+    headers = {'User-Agent': 'chadsmithmusic@icloud.com'}
+    r = requests.get(f"{API_BASE_URL}?method=track.getsimilar&artist={artist}&track={track}&api_key={API_KEY}&format=json",
+                 params={'artist': artist, 'track': track}, headers=headers)
 
-#     data = r.json()  # convert json data into string
-#     json_tracks = data["similartracks"]["track"]
+    data = r.json()  # convert json data into string
+    json_tracks = data["similartracks"]["track"]
 
-#     for track in json_tracks:
-#         artist_name = track["artist"]["name"]
-#         song_name = track["name"]
-#         insert_song = Song(song_name=song_name, artist_name=artist_name)
-#         db.session.add(insert_song)
-#         db.session.commit()
+    for track in json_tracks:
+        artist_name = track["artist"]["name"]
+        song_name = track["name"]
+    insert_song = Song(song_name=song_name, artist_name=artist_name)
+    db.session.add(insert_song)
+    db.session.commit()
 
 
 @app.route('/playlists')
