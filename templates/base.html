@@ -12,13 +12,24 @@
 </head>
 <body>
 
-<div class="jumbotron text-center vertical-center">
+<!-- Background image -->
+<div
+  class="bg-image"
+  style="
+    background-image: url('https://images.unsplash.com/photo-1466428996289-fb355538da1b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80');
+    height: 100vh;
+  "
+>
+<!-- Background image -->
+
+<div class="jumbotron text-center text-white-50 vertical-center">
     <h1 class="display-1">PlaylistGenius</h1>
 </div>
 
-<div id="content" class="text-center">
+<div id="content" class="text-center text-white-50">
     {% block content %}{% endblock %}
 </div>
 
+</div>
 </body>
 </html>
