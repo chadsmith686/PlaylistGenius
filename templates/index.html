@@ -3,11 +3,11 @@
 {% block content %}
 
 <p class="h3">Search for a song!</p>
-
+<div class="container">
 <form action="/search">
-    <input type="text" name="artist" placeholder="Artist Name">
-    <input type="text" name="track" placeholder="Track Name"><br>
-    <button class="btn btn-success mt-1">Go!</button>
+    <input class="form-control" type="text" name="artist" placeholder="Artist Name">
+    <input class="form-control" type="text" name="track" placeholder="Track Name">
+    <button class="btn btn-outline-light mt-1">Go!</button>
 </form>
-
+</div>
 {% endblock %}
