@@ -1,7 +1,6 @@
 import requests
 import pdb
 from flask import Flask, render_template, request, send_from_directory, jsonify
-from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, Song, Playlist
 from secret import API_KEY
 
@@ -15,9 +14,6 @@ app.config['SECRET_KEY'] = "its a secret!"
 
 connect_db(app)
 db.create_all()
-
-debug = DebugToolbarExtension(app)
-
 
 @app.route('/')
 def root():
@@ -52,12 +48,10 @@ def add_to_playlist():
     db.session.commit()
     return jsonify(status='success')
 
-
 @app.route('/playlists')
 def show_playlists():
     database_response = Playlist.query.all()
     return render_template('playlists.html', playlists=database_response)
-
 
 @app.route("/songs")
 def show_songs():
