@@ -1,6 +1,6 @@
 import requests
 import pdb
-from flask import Flask, render_template, request, send_from_directory
+from flask import Flask, render_template, request, send_from_directory, jsonify
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, Song, Playlist
 from secret import API_KEY
@@ -38,28 +38,19 @@ def get_similar_tracks():
                      params={'artist': artist, 'track': track}, headers=headers)
 
     data = r.json()  # convert json data into string
+
     json_tracks = data["similartracks"]["track"]
 
     return render_template("results.html", tracks=json_tracks, artist=artist, track=track)
 
-
-@app.route('/playlists/add')
-def add_to_playlist():
-    artist = request.args["artist"]
-    track = request.args["track"]
-    headers = {'User-Agent': 'chadsmithmusic@icloud.com'}
-    r = requests.get(f"{API_BASE_URL}?method=track.getsimilar&artist={artist}&track={track}&api_key={API_KEY}&format=json",
-                 params={'artist': artist, 'track': track}, headers=headers)
-
-    data = r.json()  # convert json data into string
-    json_tracks = data["similartracks"]["track"]
-
-    for track in json_tracks:
-        artist_name = track["artist"]["name"]
-        song_name = track["name"]
-    insert_song = Song(song_name=song_name, artist_name=artist_name)
+@app.route('/playlists/add', methods=['POST']) 
+def add_to_playlist():  
+    artist = request.json["artist"]
+    track = request.json["track"]
+    insert_song = Song(song_name=track, artist_name=artist)
     db.session.add(insert_song)
     db.session.commit()
+    return jsonify(status='success')
 
 
 @app.route('/playlists')
