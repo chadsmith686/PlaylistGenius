@@ -7,15 +7,15 @@
     <a href="/playlists/add"><button type="button" class="btn btn-outline-light">Save to Playlist!</button></a>
 </p>
 
-<div class="container m-0 d-flex justify-content-center">  
+<div class="container-fluid m-0 d-flex justify-content-center opacity-75">  
     <div class="row">
-        <ul class="list-group">
+        <ul class="list-group col-12">
 
-    {% for track in tracks %}
-        <li class="list-group-item list-group-item-action list-group-item-secondary">
-        {{ track["artist"]["name"] }} - {{ track["name"] }} <br>
-        </li>
-    {% endfor %}
+        {% for track in tracks %}
+            <li class="list-group-item list-group-item-action list-group-item-secondary">
+            {{ track["artist"]["name"] }} - {{ track["name"] }} <br>
+            </li>
+        {% endfor %}
 
         </ul>
     </div>
