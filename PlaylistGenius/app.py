@@ -10,7 +10,7 @@ app = Flask(__name__,  static_url_path='')
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///playlist-genius'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
-app.config['SECRET_KEY'] = "its a secret!"
+app.config['SECRET_KEY'] = "nevertell"
 
 connect_db(app)
 db.create_all()
