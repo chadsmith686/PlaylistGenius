@@ -6,8 +6,10 @@ from secret import API_KEY
 API_BASE_URL = "https://ws.audioscrobbler.com/2.0/"
 
 app = Flask(__name__,  static_url_path='')
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(
-    'DATABASE_URL', 'postgresql:///playlist-genius')
+app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
+    'DATABASE_URL', "postgres:///picslink").replace("://", "ql://", 1)
+app.config["SECRET_KEY"] = os.environ.get('SECRET_KEY', 'hellosecret1')
+
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'hellosecret1')
