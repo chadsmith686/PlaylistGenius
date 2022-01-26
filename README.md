@@ -1,6 +1,8 @@
 
 # PlaylistGenius
 
+https://playlist-genius.herokuapp.com/
+
 A full stack Python application that generates a playlist based on your favorite songs. 
 
 Stack: Python, JavaScript, Flask, Postgres, SQLAlchemy, Bootstrap
