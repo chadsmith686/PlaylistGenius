@@ -58,3 +58,6 @@ def show_playlists():
 def show_songs():
     songs = Song.query.all()
     return render_template("songs.html", songs=songs)
+
+if __name__ == "__main__": 
+    app.run(debug=True)
