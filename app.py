@@ -3,8 +3,6 @@ from flask import Flask, render_template, request, send_from_directory, jsonify
 from models import db, connect_db, Song, Playlist
 from boto.s3.connection import S3Connection
 
-from secret import API_KEY
-
 API_BASE_URL = "https://ws.audioscrobbler.com/2.0/"
 API_KEY = S3Connection(os.environ['API_KEY'], os.environ['SECRET_KEY'])
 
