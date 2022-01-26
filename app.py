@@ -1,18 +1,16 @@
 import requests, os
 from flask import Flask, render_template, request, send_from_directory, jsonify
 from models import db, connect_db, Song, Playlist
-from secret import API_KEY
+# from secret import API_KEY
 
 API_BASE_URL = "https://ws.audioscrobbler.com/2.0/"
 
 app = Flask(__name__,  static_url_path='')
 app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
-    'DATABASE_URL', "postgres:///picslink").replace("://", "ql://", 1)
+    'DATABASE_URL', "postgres:///playlistgenius").replace("://", "ql://", 1)
 app.config["SECRET_KEY"] = os.environ.get('SECRET_KEY', 'hellosecret1')
-
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'hellosecret1')
 
 connect_db(app)
 db.create_all()
