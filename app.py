@@ -1,16 +1,23 @@
+from secret import API_KEY
 import requests, os
 from flask import Flask, render_template, request, send_from_directory, jsonify
 from models import db, connect_db, Song, Playlist
 
-API_BASE_URL = "https://ws.audioscrobbler.com/2.0/"
-API_KEY = os.environ.get('API_KEY', '00000000')
-
+from secret import API_KEY
 app = Flask(__name__,  static_url_path='')
-app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
-    'DATABASE_URL', "postgres:///playlistgenius").replace("://", "ql://", 1)
-app.config["SECRET_KEY"] = os.environ.get('SECRET_KEY', 'hellosecret1')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///playlist-genius'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
+app.config['SECRET_KEY'] = "hellosecret1"
+
+# Heroku config:
+# API_KEY = os.environ.get('API_KEY', '00000000')
+
+# app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
+#     'DATABASE_URL', "postgres:///playlistgenius").replace("://", "ql://", 1)
+# app.config["SECRET_KEY"] = os.environ.get('SECRET_KEY', 'hellosecret1')
+
+API_BASE_URL = "https://ws.audioscrobbler.com/2.0/"
 
 connect_db(app)
 db.create_all()
@@ -46,7 +53,8 @@ def add_to_playlist():
     insert_song = Song(song_name=track, artist_name=artist)
     db.session.add(insert_song)
     db.session.commit()
-    return jsonify(status='success')
+    return ('/playlists')
+    # return jsonify(status='success')
 
 @app.route('/playlists')
 def show_playlists():
