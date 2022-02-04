@@ -51,14 +51,14 @@ def create_new_playlist():
     '''Shows a form that allows user to create new playlist'''
     return render_template('new.html')
 
-@app.route('/playlists/<int:id>', methods=["POST"])
-def make_new_playlist():
+@app.route('/new/<int:_id>', methods=["POST"])
+def make_new_playlist(_id):
     name = request.args["name"]
     description = request.args["description"]
-    insert_playlist = Playlist(name=name, description=description)
+    insert_playlist = Playlist(id=_id, name=name, description=description)
     db.session.add(insert_playlist)
     db.session.commit()
-    return f"<h1>Name: {name}, description: {description} </h1>"
+    return f"<h1>ID: {_id}, Name: {name}, description: {description} </h1>"
     # render_template('created.html', id=playlist_id, name=name, description=description)
 
 @app.route('/playlists')
