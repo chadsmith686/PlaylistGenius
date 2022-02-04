@@ -51,9 +51,8 @@ def create_new_playlist():
     '''Shows a form that allows user to create new playlist'''
     return render_template('new.html')
 
-@app.route('/new/<int:_id>', methods=["POST"])
+@app.route('/new/<int:id>', methods=["POST"])
 def make_new_playlist(_id):
-    _id = request.args["id"]
     name = request.args["name"]
     description = request.args["description"]
     insert_playlist = Playlist(id=_id, name=name, description=description)
