@@ -53,6 +53,7 @@ def create_new_playlist():
 
 @app.route('/new/<int:_id>', methods=["POST"])
 def make_new_playlist(_id):
+    _id = request.args["id"]
     name = request.args["name"]
     description = request.args["description"]
     insert_playlist = Playlist(id=_id, name=name, description=description)
