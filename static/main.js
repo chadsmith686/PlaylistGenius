@@ -6,7 +6,7 @@ async function saveToPlaylist({artist, track}) {
     // const track = 'sunshine';
 
     try {
-        const response = await axios.post(`${BASE_URL}/playlists/add`, {
+        const response = await axios.post(`${BASE_URL}/add`, {
             artist,
             track
         });

@@ -49,19 +49,24 @@ def get_similar_tracks():
 @app.route('/new')
 def create_new_playlist():
     '''Shows a form that allows user to create new playlist'''
+
     return render_template('new.html')
 
-@app.route('/new/<int:id>', methods=["POST"])
+@app.route('/created')
+def show_created_playlist():
+
+    return render_template('created.html')
+
+@app.route('/new/<int:_id>', methods=["POST"])
 def make_new_playlist(_id):
-    name = request.args["name"]
-    description = request.args["description"]
+    name = request.form["name"]
+    description = request.form["description"]
     insert_playlist = Playlist(id=_id, name=name, description=description)
     db.session.add(insert_playlist)
     db.session.commit()
-    return f"<h1>ID: {_id}, Name: {name}, description: {description} </h1>"
-    # render_template('created.html', id=playlist_id, name=name, description=description)
+    return render_template('created.html', id=_id, name=name, description=description)
 
-@app.route('/playlists')
+@app.route('/playlists', methods=["POST"])
 def show_playlists():
     database_response = Playlist.query.all()
     return render_template('playlists.html', playlists=database_response)
