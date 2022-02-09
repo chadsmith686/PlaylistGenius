@@ -1,13 +1,18 @@
 {% extends "base.html" %}
 
 {% block content %}
+<p class="h6">Generate a custom playlist based on tracks that you already love!</p>
+<a href="/new"><button class="btn btn-secondary mt-1 opacity-75 btn-lg">Create New Playlist</button></a><br>
+<a href="/playlists"><button class="btn btn-secondary mt-1 opacity-75 btn-lg">View Saved Playlists</button></a>
 
-<p class="h3">Search for a song!</p>
+<!-- <p class="h3">Search for a song!</p>
 <div class="container col-6">
 <form action="/search">
     <input class="form-control opacity-75" type="text" name="artist" placeholder="Artist Name" required>
     <input class="form-control opacity-75" type="text" name="track" placeholder="Track Name" required>
-    <button class="btn btn-outline-light mt-1">Go!</button>
+    <button class="btn btn-light mt-1 opacity-75">Go!</button>
 </form>
-</div>
+    <a href="/playlists"><button class="btn btn-light mt-1 opacity-75 btn-sm">View Saved Playlists</button></a>
+</div> -->
+
 {% endblock %}

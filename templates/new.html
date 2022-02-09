@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<p class="h3">Create a new playlist.</p>
+<div class="container col-6">
+<form action="/new" method="post">
+    <input class="form-control opacity-75" type="text" name="name" placeholder="Playlist Name" required>
+    <input class="form-control opacity-75" type="text" name="description" placeholder="Description">
+    <button class="btn btn-light mt-1 opacity-75">Create!</button>
+</form>
+</div>
+
+{% endblock %}

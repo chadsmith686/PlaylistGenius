@@ -4,7 +4,7 @@
 <p>Results for <b>{{artist.title()}}</b> - <b>{{track.title()}}.</b> 
 <p>
     <a href="/"><button type="button" class="btn btn-outline-light" label="back-button">Go Back</button></a>
-    <a href="/playlists/add"><button type="button" id="save" class="btn btn-outline-light">Save to Playlist!</button></a>
+    <a href="/new/{{_id}}"><button type="button" id="save" class="btn btn-outline-light">Save to Playlist!</button></a>
 </p>
 
 <div class="container-fluid m-0 d-flex justify-content-center opacity-75">  
@@ -13,7 +13,10 @@
 
         {% for track in tracks %}
             <li class="list-group-item list-group-item-action list-group-item-secondary">
-                <input class="favoriteTrack" type="checkbox" data-artist="{{ track['artist']['name'] }}" data-track="{{ track['name'] }}" /> {{ track["artist"]["name"] }} - {{ track["name"] }} <br>
+                <form method="post">
+                    <input class="favoriteTrack" type="checkbox" data-artist="{{ track['artist']['name'] }}" 
+                    data-track="{{ track['name'] }}" /> {{ track["artist"]["name"] }} - {{ track["name"] }} <br>
+                </form>
             </li>
         {% endfor %}
 
@@ -21,3 +24,4 @@
     </div>
 </div>
 {% endblock %}
+

@@ -1,10 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% for a_playlist in playlists %}
+<div class="container-fluid m-0 d-flex justify-content-center opacity-75">  
+    <div class="row">
+        <ul class="list-group col-12">
 
-<p>{{ a_playlist.name }}</p>
+        {% for a_playlist in playlists %}
+            <li class="list-group-item list-group-item-action list-group-item-secondary">{{ a_playlist.name }} - {{ a_playlist.description}}</li>
+        {% endfor %}
 
-{% endfor %}
+        </ul>
+    </div>
+</div>
+
+        <!-- {% for track in tracks %}
+            <li class="list-group-item list-group-item-action list-group-item-secondary">
+                <input class="favoriteTrack" type="checkbox" data-artist="{{ track['artist']['name'] }}" data-track="{{ track['name'] }}" /> {{ track["artist"]["name"] }} - {{ track["name"] }} <br>
+            </li>
+        {% endfor %} -->
 
 {% endblock %}
