@@ -1,0 +1,44 @@
+# A Docker Compose must always start with the version tag.
+version: '3'
+
+# You should know that Docker Compose works with services.
+# 1 service = 1 container.
+# We use the keyword 'services' to start to create services.
+services:
+  # Our app will be a service that binds to port 80 and uses a custom Dockerfile
+  app:
+    restart: always
+    # We will build our container using the Dockerfile in this directory
+    build: .
+    volumes: 
+      - .:/playlist-genius
+    ports:
+      - "5000:5000"
+    expose:
+      - 5000
+    networks: 
+      - dev
+    depends_on:
+      "database":
+        condition: service_healthy
+  # Postgres database
+  database:
+    # Official Postgres image from DockerHub
+    image: 'postgres:latest'
+    ports:
+      - "5432:5432"
+    expose: 
+      - 5432
+    networks: 
+      - dev
+    healthcheck:
+      test: pg_isready -U postgres
+      interval: 3s
+      timeout: 3s
+      retries: 3
+    environment:
+      POSTGRES_PASSWORD: secret
+
+networks:
+  dev:
+    driver: bridge
